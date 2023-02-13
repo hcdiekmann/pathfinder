@@ -11,8 +11,8 @@ import xacro
 
 
 def generate_launch_description():
-
-    # Check if we're told to use sim time
+    
+    # Get the launch configuration variables
     use_sim_time = LaunchConfiguration('use_sim_time')
 
     # Process the URDF file
