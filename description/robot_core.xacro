@@ -2,23 +2,7 @@
 <robot name="pathfinder" xmlns:xacro="http://www.ros.org/wiki/xacro" >
     <!--includes-->
     <xacro:include filename="inertial_macros.xacro"/>
-
-    <!--materials-->
-    <material name="white">
-        <color rgba="1 1 1 1" />
-    </material>
-
-    <material name="black">
-        <color rgba="0 0 0 1"/>
-    </material>
-
-     <material name="fontys_purple">
-        <color rgba="${102/255} ${51/255} ${102/255} 1"/>
-    </material>
-
-    <material name="blue">
-        <color rgba="0.2 0.2 1 1"/>
-    </material>
+    <xacro:include filename="materials.xacro"/>
 
 
     <!-- BASE LINK -->
@@ -79,6 +63,10 @@
         </xacro:inertial_cylinder>
     </link>
 
+    <gazebo reference="left_wheel">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
 
     <!-- RIGHT WHEEL LINK -->
     <joint name="right_wheel_joint" type="continuous">
@@ -105,6 +93,9 @@
         </xacro:inertial_cylinder>
     </link>
 
+    <gazebo reference="right_wheel">
+        <material>Gazebo/Black</material>
+    </gazebo>
 
     <!-- CASTER WHEEL LINK -->
     <joint name="caster_wheel_joint" type="fixed">
