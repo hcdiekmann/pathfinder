@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
-
+    <!--includes-->
     <xacro:include filename="inertial_macros.xacro"/>
 
+    <!--materials-->
     <material name="white">
         <color rgba="1 1 1 1" />
-    </material>
-
-    <material name="orange">
-        <color rgba="1 0.3 0.1 1"/>
-    </material>
-
-    <material name="blue">
-        <color rgba="0.2 0.2 1 1"/>
     </material>
 
     <material name="black">
         <color rgba="0 0 0 1"/>
     </material>
 
-    <!-- BASE LINK -->
+     <material name="fontys_purple">
+        <color rgba="${102/255} ${51/255} ${102/255} 1"/>
+    </material>
 
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+
+
+    <!-- BASE LINK -->
     <link name="base_link">
 
     </link>
 
 
     <!-- CHASSIS LINK -->
-
     <joint name="chassis_joint" type="fixed">
         <parent link="base_link"/>
         <child link="chassis"/>
@@ -38,9 +38,9 @@
         <visual>
             <origin xyz="0.15 0 0.075"/>
             <geometry>
-                <box size="0.3 0.3 0.15"/>
+                <mesh filename="package://description/meshes/pathfinder_chassis.stl" scale="1 1 1"/>
             </geometry>
-            <material name="white"/>
+            <material name="fontys_purple"/>
         </visual>
         <collision>
             <origin xyz="0.15 0 0.075"/>
@@ -53,8 +53,8 @@
         </xacro:inertial_box>
     </link>
     
-    <!-- LEFT WHEEL LINK -->
 
+    <!-- LEFT WHEEL LINK -->
     <joint name="left_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel"/>
@@ -67,7 +67,7 @@
             <geometry>
                 <cylinder radius="0.05" length="0.04"/>
             </geometry>
-            <material name="blue"/>
+            <material name="black"/>
         </visual>
         <collision>
             <geometry>
@@ -79,8 +79,8 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <!-- RIGHT WHEEL LINK -->
 
+    <!-- RIGHT WHEEL LINK -->
     <joint name="right_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_wheel"/>
@@ -93,7 +93,7 @@
             <geometry>
                 <cylinder radius="0.05" length="0.04"/>
             </geometry>
-            <material name="blue"/>
+            <material name="black"/>
         </visual>
         <collision>
             <geometry>
@@ -105,14 +105,13 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <!-- CASTER WHEEL LINK -->
 
+    <!-- CASTER WHEEL LINK -->
     <joint name="caster_wheel_joint" type="fixed">
         <parent link="chassis"/>
         <child link="caster_wheel"/>
         <origin xyz="0.24 0 0"/>
     </joint>
-
 
     <link name="caster_wheel">
         <visual>
