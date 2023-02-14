@@ -38,7 +38,7 @@
         <visual>
             <origin xyz="0.15 0 0.075"/>
             <geometry>
-                <mesh filename="file://$(find pathfinder)/src/description/meshes/pathfinder_chassis.stl" scale="1.0 1.0 1.0"/>
+                <mesh filename="file://$(find pathfinder)/description/meshes/pathfinder_chassis.stl" scale="1.0 1.0 1.0"/>
             </geometry>
             <material name="fontys_purple"/>
         </visual>
