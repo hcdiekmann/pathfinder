@@ -41,5 +41,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
 ## Todo
+- [ ] add SLAM (Simultaneous Localization and Mapping)
+- [ ] add nav2 
 - [ ] use ros2_control package for controlling
-- [ ] add ros dependencies to package.xml
+- [ ] add ros & gazebo dependencies to package.xml
