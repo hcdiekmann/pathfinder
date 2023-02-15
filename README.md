@@ -1,14 +1,14 @@
 # Pathfinder
 A complete simulation of a differential drive robot with a LiDAR sensor.
 
-> This package was developed and tested with ROS 2 Foxy on Ubuntu 20.04
+> **NOTE:** This package was developed and tested with ROS 2 Foxy on Ubuntu 20.04
 
 ![Robot](https://user-images.githubusercontent.com/13176191/218996845-17a21302-1ec9-4555-a887-d7cf6899bc79.png)
 ___
 
 ## **Install**
 
-- #### Clone the repository into your ROS 2 workspace `src`  directory
+- #### Clone this repository into your ROS 2 workspace `src`  directory
 ```bash
 cd ~/ros2_ws/src 
 git clone https://github.com/hcdiekmann/pathfinder.git
@@ -43,6 +43,6 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 ## Todo
 - [ ] add SLAM (Simultaneous Localization and Mapping)
-- [ ] add nav2 
+- [ ] add nav2 for autonomous navigation
 - [ ] use ros2_control package for controlling
 - [ ] add ros & gazebo dependencies to package.xml
