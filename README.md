@@ -3,6 +3,7 @@ A complete simulation of a differential drive robot with a LiDAR sensor.
 
 > This package was developed and tested with ROS 2 Foxy on Ubuntu 20.04
 
+![Robot](https://user-images.githubusercontent.com/13176191/218996845-17a21302-1ec9-4555-a887-d7cf6899bc79.png)
 ___
 
 ## **Install**
