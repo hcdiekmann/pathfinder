@@ -3,9 +3,9 @@
 <package format="3">
   <name>pathfinder</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="my_email@email.com">Hans Christian Diekmann</maintainer>
-  <license>TODO: License declaration</license>
+  <description>diff drive robot swarm simulation</description>
+  <maintainer email="hcdiekmann@hotmail.com">Hans Christian Diekmann</maintainer>
+  <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

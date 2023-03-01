@@ -17,8 +17,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
+
 # find_package(<dependency> REQUIRED)
 
 if(BUILD_TESTING)
@@ -33,7 +32,7 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY config description launch worlds
+  DIRECTORY config description src launch worlds
   DESTINATION share/${PROJECT_NAME}
 )
 

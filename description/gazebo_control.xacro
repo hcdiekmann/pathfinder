@@ -2,7 +2,10 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <gazebo>
-        <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+        <plugin filename="libgazebo_ros_diff_drive.so" name="diff_drive">
+            <ros>
+        <!-- <namespace>/pathfinder</namespace> -->
+            </ros>
 
             <!-- Wheel Information -->
             <left_joint>left_wheel_joint</left_joint>

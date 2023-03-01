@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="pathfinder" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
     <!--includes-->
     <xacro:include filename="inertial_macros.xacro"/>
     <xacro:include filename="materials.xacro"/>
@@ -22,7 +22,7 @@
         <visual>
             <origin xyz="0.15 0 0" rpy="0 0 ${pi/2}"/>
             <geometry>
-                <mesh filename="file://$(find pathfinder)/description/meshes/pathfinder_chassis.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="file://$(find pathfinder)/description/meshes/pathfinder_chassis.stl" scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
             </geometry>
             <material name="fontys_purple"/>
         </visual>
