@@ -43,7 +43,7 @@ def generate_launch_description():
         ns = robot['name']
         spawn_robots_cmds.append((
             IncludeLaunchDescription(
-               PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')), 
+               PythonLaunchDescriptionSource([os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')]), 
                launch_arguments={'use_sim_time': 'true', 'namespace': ns,
                                      'robot_description': urdf}.items(),
             ),
