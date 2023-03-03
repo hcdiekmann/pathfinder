@@ -10,7 +10,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch_ros.actions import Node
 
-NUM_ROBOTS = 3
+NUM_ROBOTS = 100
 
 def gen_robot_list(number_of_robots):
     
