@@ -46,7 +46,7 @@ def generate_launch_description():
                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')), 
                launch_arguments={'use_sim_time': 'true', 'namespace': ns,
                                      'robot_description': urdf, 'use_sim_time': 'true',
-                                    'remappings':[('/tf', '/'+ns+'/tf'), ('/tf_static', '/'+ns+'/tf_static')]},
+                                    'remappings':('/tf', '/'+ns+'/tf') ('/tf_static', '/'+ns+'/tf_static')}.items(),
                 ),
              Node(
                     package='gazebo_ros',
