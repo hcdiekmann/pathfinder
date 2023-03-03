@@ -3,6 +3,11 @@
 
     <gazebo>
         <plugin filename="libgazebo_ros_diff_drive.so" name="diff_drive">
+            <ros> 
+               <!--<namespace>--> 
+               <!--<remapping tf>-->
+            </ros>
+
 
             <!-- Wheel Information -->
             <left_joint>left_wheel_joint</left_joint>
