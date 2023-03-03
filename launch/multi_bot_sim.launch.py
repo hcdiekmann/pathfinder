@@ -40,26 +40,18 @@ def generate_launch_description():
     # creates a list of commands to spawn robots
     spawn_robots_cmds = []
     for robot in robots:
-        ns = robot['name']
-        spawn_robots_cmds.append((
+        spawn_robots_cmds.append(
             IncludeLaunchDescription(
-               PythonLaunchDescriptionSource([os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')]), 
-               launch_arguments={'use_sim_time': 'true', 'namespace': ns,
-                                     'robot_description': urdf}.items(),
-            ),
-            Node(
-                package='gazebo_ros',
-                executable='spawn_entity.py',
-                output='screen',
-                arguments=[
-                    '-topic', 'robot_description',
-                    '-robot_name', ns,
-                    '-robot_namespace', ns,
-                    '-x', str(robot['x_pose']),
-                    '-y', str(robot['y_pose']),
-                    '-z', str(robot['z_pose'])]
-            ),
-        ))
+                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch',
+                                                           'spawn_swarm_launch.py')),
+                launch_arguments={
+                                  'robot_urdf': urdf,
+                                  'x': TextSubstitution(text=str(robot['x_pose'])),
+                                  'y': TextSubstitution(text=str(robot['y_pose'])),
+                                  'z': TextSubstitution(text=str(robot['z_pose'])),
+                                  'robot_name': robot['name'],
+                                  'robot_namespace': robot['name']
+                                  }.items()))
 
 
     # Create the launch description and populate
