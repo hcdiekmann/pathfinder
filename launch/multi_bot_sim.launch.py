@@ -32,7 +32,7 @@ def generate_launch_description():
     
     # Process the URDF xacro file
     urdf = xacro.process_file(xacro_file)
-
+    urdf = urdf.toxml()
     # Names and poses of the robots
     robots = gen_robot_list(NUM_ROBOTS)
 
@@ -46,7 +46,7 @@ def generate_launch_description():
                     executable='robot_state_publisher',
                     output='screen',
                     namespace=robot['name'],
-                    parameters=[{'robot_description': urdf.toxmlstring(), 'use_sim_time': 'true'}],
+                    parameters=[{'robot_description': urdf, 'use_sim_time': 'true'}],
                     remappings=[('/tf', '/'+robot['name']+'/tf'), ('/tf_static', '/'+robot['name']+'/tf_static')]
                 ),
                 Node(
