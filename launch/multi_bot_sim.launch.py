@@ -39,7 +39,7 @@ def generate_launch_description():
         spawn_robots_cmds.append(
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch',
-                                                           'spawn_swarm_launch.py')),
+                                                           'generic_spawn_launch.py')),
                 launch_arguments={
                                   'robot_urdf': urdf,
                                   'x': TextSubstitution(text=str(robot['x_pose'])),
