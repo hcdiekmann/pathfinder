@@ -32,6 +32,7 @@ def generate_launch_description():
     
     # Process the URDF xacro file
     urdf = xacro.process_file(xacro_file)
+    urdf = urdf.toxml()
 
     # Names and poses of the robots
     robots = gen_robot_list(NUM_ROBOTS)
