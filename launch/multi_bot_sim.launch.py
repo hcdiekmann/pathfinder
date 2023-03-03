@@ -33,6 +33,7 @@ def generate_launch_description():
     # Process the URDF xacro file
     urdf = xacro.process_file(xacro_file)
     urdf = urdf.toxml()
+    
     # Names and poses of the robots
     robots = gen_robot_list(NUM_ROBOTS)
 
@@ -49,7 +50,12 @@ def generate_launch_description():
                     parameters=[{'robot_description': urdf, 'use_sim_time': 'true'}],
                     remappings=[('/tf', '/'+robot['name']+'/tf'), ('/tf_static', '/'+robot['name']+'/tf_static')]
                 ),
-                Node(
+            )
+        )
+
+        spawn_robots_cmds.append(
+            IncludeLaunchDescription(
+             Node(
                     package='gazebo_ros',
                     executable='spawn_entity.py',
                     output='screen',
@@ -63,6 +69,7 @@ def generate_launch_description():
                 ),
             )
         )
+
 
     # Create the launch description and populate
     ld = LaunchDescription()
