@@ -7,22 +7,24 @@ import launch_ros.actions
 def generate_launch_description():
 
     return LaunchDescription([
-        launch_ros.actions.Node(
-            package='pathfinder',
-            executable='spawn_generic_entity.py',
-            output='screen',
-            arguments=[
-                '--robot_urdf', launch.substitutions.LaunchConfiguration('robot_urdf'),
-                '--robot_name', launch.substitutions.LaunchConfiguration('robot_name'),
-                '--robot_namespace', launch.substitutions.LaunchConfiguration('robot_namespace'),
-                '-x', launch.substitutions.LaunchConfiguration('x'),
-                '-y', launch.substitutions.LaunchConfiguration('y'),
-                '-z', launch.substitutions.LaunchConfiguration('z')]),
-        launch_ros.actions.Node(
+            launch_ros.actions.Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             output='screen',
             namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
             remappings=[('robot_description', launch.substitutions.LaunchConfiguration('robot_urdf'))],
-        )            
+        ), 
+        launch_ros.actions.Node(
+            package='gazebo_ros',
+            executable='spawn_entity.py',
+            output='screen',
+            arguments=[
+                '-topic', launch.substitutions.LaunchConfiguration('robot_urdf'),
+                '-robot_name', launch.substitutions.LaunchConfiguration('robot_name'),
+                '-robot_namespace', launch.substitutions.LaunchConfiguration('robot_namespace'),
+                '-x', launch.substitutions.LaunchConfiguration('x'),
+                '-y', launch.substitutions.LaunchConfiguration('y'),
+                '-z', launch.substitutions.LaunchConfiguration('z')]
+        ),
+          
     ])
