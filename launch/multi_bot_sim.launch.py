@@ -8,6 +8,7 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, TextSubstitution
+from launch_ros.actions import Node
 
 NUM_ROBOTS = 3
 
@@ -40,16 +41,28 @@ def generate_launch_description():
     for robot in robots:
         spawn_robots_cmds.append(
             IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch',
-                                                           'spawn_generic_entity.launch.py')),
-                launch_arguments={
-                                  'robot_urdf': urdf,
-                                  'x': TextSubstitution(text=str(robot['x_pose'])),
-                                  'y': TextSubstitution(text=str(robot['y_pose'])),
-                                  'z': TextSubstitution(text=str(robot['z_pose'])),
-                                  'robot_name': robot['name'],
-                                  'robot_namespace': robot['name']
-                                  }.items()))
+                Node(
+                    package='robot_state_publisher',
+                    executable='robot_state_publisher',
+                    output='screen',
+                    namespace=robot['name'],
+                    parameters=[{'robot_description': urdf.toxml(), 'use_sim_time': 'true'}],
+                    remappings=[('/tf', '/'+robot['name']+'/tf'), ('/tf_static', '/'+robot['name']+'/tf_static')]
+                ),
+                Node(
+                    package='gazebo_ros',
+                    executable='spawn_entity.py',
+                    output='screen',
+                    arguments=[
+                        '-topic', 'robot_description',
+                        '-robot_name', robot['name'],
+                        '-robot_namespace', robot['name'],
+                        '-x', robot['x_pose'],
+                        '-y', robot['y_pose'],
+                        '-z', robot['z_pose']]
+                ),
+            )
+        )
 
     # Create the launch description and populate
     ld = LaunchDescription()
