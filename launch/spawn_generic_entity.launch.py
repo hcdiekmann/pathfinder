@@ -19,7 +19,7 @@ def generate_launch_description():
             executable='spawn_entity.py',
             output='screen',
             arguments=[
-                '-topic', 'robot_description'),
+                '-topic', 'robot_description',
                 '-robot_name', launch.substitutions.LaunchConfiguration('robot_name'),
                 '-robot_namespace', launch.substitutions.LaunchConfiguration('robot_namespace'),
                 '-x', launch.substitutions.LaunchConfiguration('x'),
