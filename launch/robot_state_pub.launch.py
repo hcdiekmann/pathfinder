@@ -9,7 +9,6 @@ from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
 
 
-
 def generate_launch_description():
     
     # Get the launch configuration variables
@@ -30,7 +29,6 @@ def generate_launch_description():
         output='screen',
         parameters=[params]
     )
-
 
     # Launch!
     return LaunchDescription([

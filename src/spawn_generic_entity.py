@@ -13,20 +13,13 @@ import rclpy
 def main():
     # Get input arguments from user
     parser = argparse.ArgumentParser(description='Spawn Robot into Gazebo with navigation2')
-    parser.add_argument('-urdf', '--robot_urdf', type=str, default='dummy.urdf',
-                        help='Name of the robot to spawn')
-    parser.add_argument('-n', '--robot_name', type=str, default='dummy_robot',
-                        help='Name of the robot to spawn')
-    parser.add_argument('-ns', '--robot_namespace', type=str, default='dummy_robot_ns',
-                        help='ROS namespace to apply to the tf and plugins')
-    parser.add_argument('-namespace', '--namespace', type=bool, default=True,
-                        help='Whether to enable namespacing')
-    parser.add_argument('-x', type=float, default=0,
-                        help='the x component of the initial position [meters]')
-    parser.add_argument('-y', type=float, default=0,
-                        help='the y component of the initial position [meters]')
-    parser.add_argument('-z', type=float, default=0,
-                        help='the z component of the initial position [meters]')
+    parser.add_argument('-urdf', '--robot_urdf', type=str, default='dummy.urdf', help='Name of the robot to spawn')
+    parser.add_argument('-n', '--robot_name', type=str, default='dummy_robot', help='Name of the robot to spawn')
+    parser.add_argument('-ns', '--robot_namespace', type=str, default='dummy_robot_ns', help='ROS namespace to apply to the tf and plugins')
+    parser.add_argument('-namespace', '--namespace', type=bool, default=True, help='Whether to enable namespacing')
+    parser.add_argument('-x', type=float, default=0, help='the x component of the initial position [meters]')
+    parser.add_argument('-y', type=float, default=0, help='the y component of the initial position [meters]')
+    parser.add_argument('-z', type=float, default=0, help='the z component of the initial position [meters]')
 
     args, unknown = parser.parse_known_args()
 
@@ -56,7 +49,7 @@ def main():
 
     diff_drive_plugin = None
     # add more plugins here if needed
-    
+
     # find the diff_drive plugin 
     for plugin in root.iter('plugin'):
         if 'diff_drive' in plugin.attrib.values():
