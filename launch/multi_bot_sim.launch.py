@@ -61,7 +61,6 @@ def generate_launch_description():
                         '-z', str(robot['z_pose'])]
                 ),
             )
-        )
 
 
     # Create the launch description and populate
