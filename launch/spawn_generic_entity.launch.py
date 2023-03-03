@@ -18,4 +18,11 @@ def generate_launch_description():
                 '-x', launch.substitutions.LaunchConfiguration('x'),
                 '-y', launch.substitutions.LaunchConfiguration('y'),
                 '-z', launch.substitutions.LaunchConfiguration('z')]),
+        launch_ros.actions.Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            output='screen',
+            namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
+            remappings=[('robot_description', launch.substitutions.LaunchConfiguration('robot_urdf'))],
+        )            
     ])
