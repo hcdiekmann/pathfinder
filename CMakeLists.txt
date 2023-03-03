@@ -32,12 +32,12 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY config description src launch worlds
+  DIRECTORY config description scripts launch worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
 install(
-  PROGRAMS src/spawn_pathfinder.py
+  PROGRAMS scripts/generic_spawn.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
