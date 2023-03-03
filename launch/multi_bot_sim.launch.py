@@ -1,6 +1,4 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
-import xacro
+
 import os
 
 from ament_index_python.packages import get_package_share_directory, get_package_prefix
@@ -10,12 +8,13 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch_ros.actions import Node
 
-NUM_ROBOTS = 100
+
+NUM_ROBOTS = 3
+
 
 def gen_robot_list(number_of_robots):
     
     robots = []
-
     for i in range(number_of_robots):
         robot_name = "pathfinder_"+ str(i)
         x_pos = float(i)
@@ -23,11 +22,12 @@ def gen_robot_list(number_of_robots):
 
     return robots 
 
+
 def generate_launch_description():
     
     # Get the URDF xacro file path
     pkg_path = os.path.join(get_package_share_directory('pathfinder'))
-    urdf = os.path.join(pkg_path,'description/','generic_pathfinder.urdf')
+    urdf = os.path.join(pkg_path,'description/','full_pathfinder.urdf')
     assert os.path.exists(urdf), "the file doesnt exist in "+str(urdf)
     
     # Names and poses of the robots
