@@ -41,7 +41,7 @@ def generate_launch_description():
     spawn_robots_cmds = []
     for robot in robots:
         ns = robot['name']
-        spawn_robots_cmds.append(
+        spawn_robots_cmds.append((
             IncludeLaunchDescription(
                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')), 
                launch_arguments={'use_sim_time': 'true', 'namespace': ns,
@@ -61,6 +61,7 @@ def generate_launch_description():
                         '-z', str(robot['z_pose'])]
                 ),
             )
+        )
 
 
     # Create the launch description and populate
