@@ -59,6 +59,7 @@ def main():
     for plugin in root.iter('plugin'):
         if 'diff_drive' in plugin.attrib.values():
             diff_drive_plugin = plugin
+            break
 
     # We change the namespace to the robots corresponding one
     tag_diff_drive_ros_params = diff_drive_plugin.find('ros')
