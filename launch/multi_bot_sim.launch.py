@@ -57,9 +57,9 @@ def generate_launch_description():
                         '-topic', 'robot_description',
                         '-robot_name', robot['name'],
                         '-robot_namespace', robot['name'],
-                        '-x', robot['x_pose'],
-                        '-y', robot['y_pose'],
-                        '-z', robot['z_pose']]
+                        '-x', str(robot['x_pose']),
+                        '-y', str(robot['y_pose']),
+                        '-z', str(robot['z_pose'])]
                 ),
             )
         )
