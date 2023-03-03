@@ -12,7 +12,7 @@ def generate_launch_description():
             executable='robot_state_publisher',
             output='screen',
             namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
-            remappings=[('robot_description', launch.substitutions.LaunchConfiguration('robot_urdf'))],
+            arguments=[('robot_description', launch.substitutions.LaunchConfiguration('robot_urdf'))],
         ), 
         launch_ros.actions.Node(
             package='gazebo_ros',
