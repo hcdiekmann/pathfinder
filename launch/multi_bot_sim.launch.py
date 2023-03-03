@@ -45,23 +45,21 @@ def generate_launch_description():
             IncludeLaunchDescription(
                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')), 
                launch_arguments={'use_sim_time': 'true', 'namespace': ns,
-                                     'robot_description': urdf, 'use_sim_time': 'true',
-                                    'remappings':('/tf', '/'+ns+'/tf') ('/tf_static', '/'+ns+'/tf_static')}.items(),
-                ),
-             Node(
-                    package='gazebo_ros',
-                    executable='spawn_entity.py',
-                    output='screen',
-                    arguments=[
-                        '-topic', 'robot_description',
-                        '-robot_name', ns,
-                        '-robot_namespace', ns,
-                        '-x', str(robot['x_pose']),
-                        '-y', str(robot['y_pose']),
-                        '-z', str(robot['z_pose'])]
-                ),
-            )
-        )
+                                     'robot_description': urdf, 'use_sim_time': 'true'}.items(),
+            ),
+            Node(
+                package='gazebo_ros',
+                executable='spawn_entity.py',
+                output='screen',
+                arguments=[
+                    '-topic', 'robot_description',
+                    '-robot_name', ns,
+                    '-robot_namespace', ns,
+                    '-x', str(robot['x_pose']),
+                    '-y', str(robot['y_pose']),
+                    '-z', str(robot['z_pose'])]
+            ),
+        ))
 
 
     # Create the launch description and populate
