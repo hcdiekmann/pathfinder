@@ -36,4 +36,9 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(
+  PROGRAMS src/spawn_pathfinder.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
