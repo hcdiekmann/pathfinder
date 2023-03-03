@@ -27,7 +27,7 @@ def generate_launch_description():
     
     # Get the URDF xacro file path
     pkg_path = os.path.join(get_package_share_directory('pathfinder'))
-    urdf = os.path.join(pkg_path,'description','generic_pathfinder.urdf')
+    urdf = os.path.join(pkg_path,'description/','generic_pathfinder.urdf')
     assert os.path.exists(urdf), "the file doesnt exist in "+str(urdf)
     
     # Names and poses of the robots
