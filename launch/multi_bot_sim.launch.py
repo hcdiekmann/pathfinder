@@ -42,10 +42,10 @@ def generate_launch_description():
     for robot in robots:
         spawn_robots_cmds.append(
             IncludeLaunchDescription(
-               PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch','robot_state_pub.launch.py'
-                ), launch_arguments={'use_sim_time': 'true', 'namespace': robot['name'],
+               PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')), 
+               launch_arguments={'use_sim_time': 'true', 'namespace': robot['name'],
                                      'robot_description': urdf, 'use_sim_time': 'true',
-                                    'remappings':[('/tf', '/'+robot['name']+'/tf'), ('/tf_static', '/'+robot['name']+'/tf_static')]}.items()
+                                    'remappings':[('/tf', '/'+robot['name']+'/tf'), ('/tf_static', '/'+robot['name']+'/tf_static')]}.items(),
                 ),
              Node(
                     package='gazebo_ros',
