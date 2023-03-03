@@ -45,7 +45,7 @@ def generate_launch_description():
             IncludeLaunchDescription(
                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch','robot_state_pub.launch.py')), 
                launch_arguments={'use_sim_time': 'true', 'namespace': ns,
-                                     'robot_description': urdf, 'use_sim_time': 'true'}.items(),
+                                     'robot_description': urdf}.items(),
             ),
             Node(
                 package='gazebo_ros',
