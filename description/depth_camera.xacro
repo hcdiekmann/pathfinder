@@ -10,13 +10,16 @@
     <link name="camera_link">
         <visual>
             <geometry>
-               <mesh filename="file://$(find pathfinder)/description/meshes/intel_realsense_D435.stl" scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
+              <mesh filename="file://$(find pathfinder)/description/meshes/intel_realsense_D435.stl" 
+                        scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
             </geometry>
+            <material name="blue"/>
         </visual>
         <collision>
             <origin xyz="0 0 0"/>
             <geometry>
-              <mesh filename="file://$(find pathfinder)/description/meshes/intel_realsense_D435.stl" scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
+              <mesh filename="file://$(find pathfinder)/description/meshes/intel_realsense_D435.stl" 
+                    scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
             </geometry>
         </collision>
     </link>
@@ -43,7 +46,7 @@
                 <horizontal_fov>1.089</horizontal_fov>
                 <image>
                     <format>B8G8R8</format>
-                    <width>640</width>
+                    <width>848</width>
                     <height>480</height>
                 </image>
                 <clip>
