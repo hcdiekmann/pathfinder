@@ -31,7 +31,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
           'world',
-          default_value=[os.path.join(pkg_path, 'worlds', 'pathfinder_test.world') ],
+          default_value=[os.path.join(pkg_path, 'worlds', 'maze.world') ],
           description='SDF world file'),
         gazebo,
         spawn_robots,
