@@ -4,7 +4,7 @@
     <joint name="depth_cam_joint" type="fixed">
         <parent link="chassis"/>
         <child link="camera_link"/>
-        <origin xyz="0.32 0 0.1" rpy="0 0 0"/>
+        <origin xyz="0.32 0 0.1" rpy="0 0 ${-pi/2}"/>
     </joint>
 
     <link name="camera_link">
@@ -14,9 +14,9 @@
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0.15 0 0.075"/>
+            <origin xyz="0 0 0"/>
             <geometry>
-                <box size="0.03 0.03 0.02"/>
+              <mesh filename="file://$(find pathfinder)/description/meshes/intel_realsense_D435.stl" scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
             </geometry>
         </collision>
     </link>
@@ -25,7 +25,7 @@
     <joint name="camera_optical_joint" type="fixed">
         <parent link="camera_link"/>
         <child link="camera_link_optical"/>
-        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/3}"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
     </joint>
 
     <link name="camera_link_optical"></link>
