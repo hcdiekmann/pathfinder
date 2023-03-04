@@ -14,6 +14,14 @@
         <color rgba="1 0 0 1"/>
     </material>
 
+    <material name="green">
+        <color rgba="0 1 0 1"/>
+    </material>
+    
+    <material name="blue">
+        <color rgba="0 0 1 1"/>
+    </material>
+
     <material name="fontys_purple">
         <color rgba="${102/255} ${51/255} ${102/255} 1"/>
     </material>
