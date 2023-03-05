@@ -32,7 +32,7 @@
     <joint name="camera_optical_joint" type="fixed">
         <parent link="camera_link"/>
         <child link="camera_link_optical"/>
-        <origin xyz="0 0 0" rpy="${-pi/2} 0 0"/> <!-- rotate 90 degrees around x-axis. Z axis becomes depth(x-axis)-->
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/> <!-- rotate 90 degrees around x-axis. Z axis becomes depth(x-axis)-->
     </joint>
 
     <link name="camera_link_optical"></link>
@@ -58,6 +58,7 @@
                     <far>6.0</far>
                 </clip>
             </camera>
+
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
                 <frame_name>camera_link_optical</frame_name>
                 <min_depth>0.28</min_depth>
