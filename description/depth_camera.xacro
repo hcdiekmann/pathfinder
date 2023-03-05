@@ -4,12 +4,12 @@
     <joint name="depth_cam_joint" type="fixed">
         <parent link="chassis"/>
         <child link="camera_link"/>
-        <origin xyz="0.31 0 0.1" rpy="0 0 ${-pi/2}"/>
+        <origin xyz="0.31 0 0.1" rpy="0 0 0"/>
     </joint>
 
     <link name="camera_link">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
             <geometry>
               <mesh filename="file://$(find pathfinder)/description/meshes/intel_realsense_D435.stl" 
                         scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
@@ -19,8 +19,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-              <mesh filename="file://$(find pathfinder)/description/meshes/intel_realsense_D435.stl" 
-                    scale="0.001 0.001 0.001"/> <!-- scale is in meters -->
+                <box size="0.025 0.09 0.025"/>
             </geometry>
         </collision>
          <xacro:inertial_box mass="0.1" x="0.025" y="0.09" z="0.025">
