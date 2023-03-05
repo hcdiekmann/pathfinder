@@ -30,13 +30,13 @@ def generate_launch_description():
 
     # Get the URDF xacro file path
     xacro_file = xacro.process_file(os.path.join(get_package_share_directory(package_name), 'description/', 'robot.urdf.xacro'))
-    urdf_file = os.path.join(get_package_share_directory(package_name), 'description/', 'full.urdf')
+    urdf_file = os.path.join(get_package_share_directory(package_name), 'description/', 'complete.urdf')
 
     urdf = open(urdf_file, "w")
     urdf.write(xacro_file.toxml())
     urdf.close()
 
-    robot_description = os.path.join(get_package_share_directory(package_name), 'description/','full.urdf')\
+    robot_description = os.path.join(get_package_share_directory(package_name), 'description/','complete.urdf')\
     
     
     robots = gen_robot_list(NUM_ROBOTS) # list of robots with names and poses
