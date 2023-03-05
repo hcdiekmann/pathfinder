@@ -45,7 +45,7 @@ def generate_launch_description():
     for robot in robots:
         spawn_robots_cmds.append(
             IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch',
+                PythonLaunchDescriptionSource(os.path.join(get_package_share_directory(package_name), 'launch',
                                                            'generic_spawn_launch.py')),
                 launch_arguments={
                                   'robot_urdf': robot_description,
