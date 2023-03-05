@@ -1,6 +1,5 @@
 
 import os
-import xacro
 
 from ament_index_python.packages import get_package_share_directory, get_package_prefix
 from launch import LaunchDescription
@@ -26,17 +25,10 @@ def gen_robot_list(number_of_robots):
 
 def generate_launch_description():
     
-    package_name='pathfinder'
-
     # Get the URDF xacro file path
-    xacro_file = xacro.process_file(os.path.join(get_package_share_directory(package_name), 'description/', 'robot.urdf.xacro'))
-    urdf_file = os.path.join(get_package_share_directory(package_name), 'description/', 'complete.urdf')
-
-    urdf = open(urdf_file, "w")
-    urdf.write(xacro_file.toxml())
-    urdf.close()
-
-    robot_description = os.path.join(get_package_share_directory(package_name), 'description/','complete.urdf')\
+    pkg_path = os.path.join(get_package_share_directory('pathfinder'))
+    urdf = os.path.join(pkg_path,'description/','full_pathfinder.urdf')
+    assert os.path.exists(urdf), "the file doesnt exist in "+str(urdf)
     
     
     robots = gen_robot_list(NUM_ROBOTS) # list of robots with names and poses
@@ -45,10 +37,10 @@ def generate_launch_description():
     for robot in robots:
         spawn_robots_cmds.append(
             IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(os.path.join(get_package_share_directory(package_name), 'launch',
+                PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch',
                                                            'generic_spawn_launch.py')),
                 launch_arguments={
-                                  'robot_urdf': robot_description,
+                                  'robot_urdf': urdf,
                                   'x': TextSubstitution(text=str(robot['x_pose'])),
                                   'y': TextSubstitution(text=str(robot['y_pose'])),
                                   'z': TextSubstitution(text=str(robot['z_pose'])),
