@@ -33,11 +33,12 @@ def main():
 
     # Start node
     rclpy.init()
-    node = rclpy.create_node('entity_spawner')
+    node_name = args.robot_name + '_spawner'
+    node = rclpy.create_node(node_name)
 
     node.get_logger().info(
         'Creating Service client to connect to `/spawn_entity`')
-    client = node.create_client(SpawnEntity, '/spawn_entity')
+    client = node.create_client(SpawnEntity, node_name)
 
     node.get_logger().info('Connecting to `/spawn_entity` service...')
     if not client.service_is_ready():
