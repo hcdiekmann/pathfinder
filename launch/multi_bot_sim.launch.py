@@ -16,6 +16,7 @@ NUM_ROBOTS = 3
 def gen_robot_list(number_of_robots):
     
     robots = []
+    
     for i in range(number_of_robots):
         robot_name = "pathfinder_"+ str(i)
         x_pos = float(i)
@@ -26,20 +27,15 @@ def gen_robot_list(number_of_robots):
 
 def generate_launch_description():
     
-    package_name = 'pathfinder'
     pkg_path = os.path.join(get_package_share_directory('pathfinder'))
 
     # Get the URDF xacro file path
     xacro_file = xacro.process_file(os.path.join(pkg_path, 'description/', 'robot.urdf.xacro'))
-    urdf_description = os.path.join(pkg_path, 'description/', 'full_pathfinder.urdf')
+    urdf_path = os.path.join(pkg_path, 'description/', 'full_pathfinder.urdf')
 
-    urdf_file = open(urdf_description, "w")
+    urdf_file = open(urdf_path, "w")
     urdf_file.write(xacro_file.toxml())
     urdf_file.close()
-    print(urdf_file)
-
-    robot_description = os.path.join(pkg_path, 'description/', 'full_pathfinder.urdf')
-    print(robot_description)
     
     robots = gen_robot_list(NUM_ROBOTS) # list of robots with names and poses
     spawn_robots_cmds = [] # list of commands to spawn robots
@@ -50,7 +46,7 @@ def generate_launch_description():
                 PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch',
                                                            'generic_spawn_launch.py')),
                 launch_arguments={
-                                  'robot_urdf': robot_description,
+                                  'robot_urdf': urdf_path,
                                   'x': TextSubstitution(text=str(robot['x_pose'])),
                                   'y': TextSubstitution(text=str(robot['y_pose'])),
                                   'z': TextSubstitution(text=str(robot['z_pose'])),
