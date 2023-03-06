@@ -38,7 +38,7 @@ def generate_launch_description():
     urdf_file.close()
 
     robot_description = os.path.join(pkg_path, 'description/', 'full_pathfinder.urdf')
-    
+    print(robot_description)
     
     robots = gen_robot_list(NUM_ROBOTS) # list of robots with names and poses
     spawn_robots_cmds = [] # list of commands to spawn robots
