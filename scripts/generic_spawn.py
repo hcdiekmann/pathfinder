@@ -34,7 +34,7 @@ def main():
     # Start node
     rclpy.init()
     node_name = args.robot_name + '_spawner'
-    node = rclpy.create_node('entity_spawner')
+    node = rclpy.create_node(node_name)
 
     node.get_logger().info(
         'Creating Service client to connect to `/spawn_entity`')
@@ -46,13 +46,11 @@ def main():
         node.get_logger().info('...connected!')
 
 
-    urdf_file_path = args.robot_urdf
-    print(urdf_file_path)
-
     # We need to remap the transform (/tf) topic so each robot has its own.
     # We do this by adding `ROS argument entries` to the urdf file for
     # each plugin broadcasting a transform. These argument entries provide the
     # remapping rule, i.e. /tf -> /<robot_id>/tf
+    urdf_file_path = args.robot_urdf
     tree = ET.parse(urdf_file_path)
     root = tree.getroot()
   
