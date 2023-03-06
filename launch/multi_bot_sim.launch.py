@@ -36,6 +36,7 @@ def generate_launch_description():
     urdf_file = open(urdf_description, "w")
     urdf_file.write(xacro_file.toxml())
     urdf_file.close()
+    print(urdf_file)
 
     robot_description = os.path.join(pkg_path, 'description/', 'full_pathfinder.urdf')
     print(robot_description)
