@@ -48,7 +48,10 @@
             <origin xyz="0.15 0 0.075" rpy="0 0 0"/>
         </xacro:inertial_box>
     </link>
-    
+
+    <gazebo reference="chassis">
+        <material>Gazebo/Purple</material>
+    </gazebo>
 
     <!-- LEFT WHEEL LINK -->
     <joint name="left_wheel_joint" type="continuous">
@@ -121,7 +124,7 @@
             <geometry>
                 <sphere radius="0.05"/>
             </geometry>
-            <material name="black"/>
+            <material name="grey"/>
         </visual>
         <collision>
             <geometry>
@@ -134,7 +137,7 @@
     </link>
     
     <gazebo reference="caster_wheel">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/Grey</material>
         <mu1 value="0.001"/> <!-- friction -->
         <mu2 value="0.001"/>
     </gazebo>

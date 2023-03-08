@@ -2,12 +2,11 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <gazebo>
-        <plugin filename="libgazebo_ros_diff_drive.so" name="diff_drive">
+        <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
             <ros> 
-               <!--<namespace>--> 
-               <!--<remapping tf>-->
+               <!--<namespace> added during multi bot launch </namespace>--> 
+               <!--<remapping> added during multi bot launch </remapping>-->
             </ros>
-
 
             <!-- Wheel Information -->
             <left_joint>left_wheel_joint</left_joint>

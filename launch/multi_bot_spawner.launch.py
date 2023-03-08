@@ -3,6 +3,7 @@ import os
 import xacro
 
 from ament_index_python.packages import get_package_share_directory, get_package_prefix
+
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -28,6 +29,7 @@ def gen_robot_list(number_of_robots):
 def generate_launch_description():
     
     pkg_path = os.path.join(get_package_share_directory('pathfinder'))
+    use_sim_time = LaunchConfiguration('use_sim_time')
 
     # Get the URDF xacro file path
     xacro_file = xacro.process_file(os.path.join(pkg_path, 'description/', 'robot.urdf.xacro'))
@@ -41,18 +43,23 @@ def generate_launch_description():
     spawn_robots_cmds = [] # list of commands to spawn robots
 
     for robot in robots:
+        robot_name = robot['name']
+
         spawn_robots_cmds.append(
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch',
                                                            'generic_spawn_launch.py')),
                 launch_arguments={
-                                  'robot_urdf': urdf_path,
+                                  'use_sim_time': use_sim_time,
+                                  'robot_name': robot_name,
+                                  'robot_namespace': robot_name,
+                                  'urdf': open(urdf_path).read(),
+                                #   'tf_prefix': robot_name,
+                                  'urdf_path': urdf_path,
                                   'x': TextSubstitution(text=str(robot['x_pose'])),
                                   'y': TextSubstitution(text=str(robot['y_pose'])),
-                                  'z': TextSubstitution(text=str(robot['z_pose'])),
-                                  'robot_name': robot['name'],
-                                  'robot_namespace': robot['name']
-                                  }.items()))
+                                  'z': TextSubstitution(text=str(robot['z_pose']))
+                                  }.items(),))
 
 
     # Create the launch description and populate
