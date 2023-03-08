@@ -27,14 +27,14 @@ colcon build
 ```bash
 ros2 launch pathfinder single_bot_sim.launch.py world:=~/ros2_ws/src/pathfinder/worlds/test.world
 ```
-![Gazebo](https://user-images.githubusercontent.com/13176191/218972913-8798d10f-c0d3-446b-a264-7c6902a8248c.png)
+![Gazebo](https://user-images.githubusercontent.com/13176191/223680079-d83d9e6e-be6d-49b1-92b4-b6bdd5af3cbb.png)
 
 - #### View the LiDAR scan and odometry in RViz
 ```bash
 cd ~/ros2_ws
 rviz2 -d src/pathfinder/config/view_lidar_sim.rviz                               
 ```
-![RViz](https://user-images.githubusercontent.com/13176191/218973185-7bfe3f7e-ca61-4831-87b1-8b7d29ac0319.png)
+![RViz](https://user-images.githubusercontent.com/13176191/223680149-08a8b8fe-f99b-43f1-a743-2d4f220abbcf.png)
 
 - #### Control the robot with the teleop_twist_keyboard node
 ```bash
@@ -42,7 +42,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
 ## Todo
-- [ ] add SLAM (Simultaneous Localization and Mapping)
+- [x] add SLAM (Simultaneous Localization and Mapping)
 - [ ] add nav2 for autonomous navigation
-- [ ] use ros2_control package for controlling
+- [ ] add multi robot spawn support
 - [ ] add ros & gazebo dependencies to package.xml
