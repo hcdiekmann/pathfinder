@@ -18,14 +18,14 @@ git clone https://github.com/hcdiekmann/pathfinder.git
 ```bash
 cd ~/ros2_ws
 colcon build
-source install/setup.bash
+. install/setup.bash
 ```
 
 ## **Run**
 
 - #### Launch the simulation with optional Gazebo world file
 ```bash
-ros2 launch pathfinder single_bot_sim.launch.py world:=~/ros2_ws/src/pathfinder/worlds/pathfinder_test.world
+ros2 launch pathfinder single_bot_sim.launch.py world:=~/ros2_ws/src/pathfinder/worlds/test.world
 ```
 ![Gazebo](https://user-images.githubusercontent.com/13176191/218972913-8798d10f-c0d3-446b-a264-7c6902a8248c.png)
 
