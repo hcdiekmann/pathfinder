@@ -59,9 +59,9 @@ def main():
     # We change the namespace to the robots corresponding one
     tag_diff_drive_ros_params = diff_drive_plugin.find('ros')
     # tag_diff_drive_ns = ET.SubElement(tag_diff_drive_ros_params, 'namespace')
-    # tag_diff_drive_ns.text = '/' + robot_name
+    # tag_diff_drive_ns.text = '/' + args.robot_name
     ros_tf_remap = ET.SubElement(tag_diff_drive_ros_params, 'remapping')
-    ros_tf_remap.text = '/tf:=/' + args.robot_name + '/tf'
+    ros_tf_remap.text = 'tf:=/' + args.robot_name + '/tf'
 
     # Set data for request
     request = SpawnEntity.Request()

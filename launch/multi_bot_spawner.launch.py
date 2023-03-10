@@ -54,7 +54,6 @@ def generate_launch_description():
                                   'robot_name': robot_name,
                                   'robot_namespace': robot_name,
                                   'urdf': open(urdf_path).read(),
-                                #   'tf_prefix': robot_name,
                                   'urdf_path': urdf_path,
                                   'x': TextSubstitution(text=str(robot['x_pose'])),
                                   'y': TextSubstitution(text=str(robot['y_pose'])),
