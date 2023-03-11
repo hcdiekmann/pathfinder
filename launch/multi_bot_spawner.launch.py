@@ -53,6 +53,8 @@ def generate_launch_description():
                                   'use_sim_time': use_sim_time,
                                   'robot_name': robot_name,
                                   'robot_namespace': robot_name,
+                                  'tf_remapping': '/'+robot_name+'/tf',
+                                  'frame_prefix': robot_name+'/',
                                   'urdf': open(urdf_path).read(),
                                   'urdf_path': urdf_path,
                                   'x': TextSubstitution(text=str(robot['x_pose'])),
