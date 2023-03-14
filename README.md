@@ -1,5 +1,5 @@
 # Pathfinder
-A complete simulation of a differential drive robot with a LiDAR sensor.
+A ROS 2 Gazebo simulation of an autonomous differential drive robot with a LiDAR sensor.
 
 > **NOTE:** This package was developed and tested with ROS 2 Foxy on Ubuntu 20.04
 
@@ -14,7 +14,7 @@ cd ~/ros2_ws/src
 git clone https://github.com/hcdiekmann/pathfinder.git
 ```
 
-- #### Build the package and source the installation
+- #### Build the package and source the underlay installation
 ```bash
 cd ~/ros2_ws
 colcon build

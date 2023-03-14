@@ -1,20 +1,13 @@
 from launch import LaunchDescription
-from launch.actions import OpaqueFunction
+
 import launch.actions
 import launch_ros.actions
-from launch.substitutions import LaunchConfiguration
-
-ns_str = ''
-
-def get_ns_from_launch_config(context,*args, **kwargs):
-    ns_str = launch.substitutions.LaunchConfiguration('tf_remapping').perform(context)
-    print(ns_str)
+import launch.substitutions
 
 
 def generate_launch_description():
 
     return LaunchDescription([
-        # OpaqueFunction(function=get_ns_from_launch_config),
 
         launch_ros.actions.Node(
             package='pathfinder',
@@ -33,10 +26,25 @@ def generate_launch_description():
             executable='robot_state_publisher',
             output='screen',
             namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
-            remappings=[('/tf',launch.substitutions.LaunchConfiguration('tf_remapping'))],
+            remappings=[('/tf',launch.substitutions.LaunchConfiguration('tf_remapping')),
+                        ('/tf_static',launch.substitutions.LaunchConfiguration('static_tf_remap'))],
             parameters=[{
                 'robot_description': launch.substitutions.LaunchConfiguration('urdf'),
-                'frame_prefix': launch.substitutions.LaunchConfiguration('frame_prefix'),
+                # 'frame_prefix': launch.substitutions.LaunchConfiguration('frame_prefix'),
                 'use_sim_time': launch.substitutions.LaunchConfiguration('use_sim_time'), }]),
-                
+        
+        launch_ros.actions.Node(
+            package='slam_toolbox',
+            executable='async_slam_toolbox_node',
+            name='slam_toolbox',
+            output='screen',
+            namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
+            remappings=[('/tf',launch.substitutions.LaunchConfiguration('tf_remapping')),
+                        ('/tf_static',launch.substitutions.LaunchConfiguration('static_tf_remap')),
+                        ('/scan', launch.substitutions.LaunchConfiguration('scan_topic')),
+                        ('/map', launch.substitutions.LaunchConfiguration('map_topic')),
+                        ('/odom',launch.substitutions.LaunchConfiguration('odom_topic'))],
+            parameters=[launch.substitutions.LaunchConfiguration('slam_params'),
+                        {'use_sim_time': launch.substitutions.LaunchConfiguration('use_sim_time')}])
+
     ])
