@@ -44,10 +44,10 @@ def generate_launch_description():
     )
 
     # Load SLAM parameters from yaml file and add node to launch description
-    slam_params_file = os.path.join(pkg_pathfinder,'config', 'slam_params_online_async.yaml')
+    slam_params_file = os.path.join(pkg_pathfinder,'config', 'mapper_params_online_async.yaml')
     slam = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(pkg_pathfinder,'launch','slam_online_async_launch.py')]), 
-                launch_arguments={'params_file': slam_params_file}.items()
+                PythonLaunchDescriptionSource([os.path.join(get_package_share_directory('slam_toolbox'),'launch','online_async_launch.py')]), 
+                launch_arguments={'slam_params_file': slam_params_file}.items()
     )
 
     # Include nav2_bringup launch file

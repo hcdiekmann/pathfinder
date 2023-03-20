@@ -24,7 +24,7 @@ from launch_ros.actions import LoadComposableNodes
 from launch_ros.actions import Node
 from launch_ros.descriptions import ComposableNode
 from nav2_common.launch import RewrittenYaml
-
+import launch.substitutions
 
 def generate_launch_description():
     # Get the launch directory

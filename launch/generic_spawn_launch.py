@@ -30,21 +30,23 @@ def generate_launch_description():
                         ('/tf_static',launch.substitutions.LaunchConfiguration('static_tf_remap'))],
             parameters=[{
                 'robot_description': launch.substitutions.LaunchConfiguration('urdf'),
-                # 'frame_prefix': launch.substitutions.LaunchConfiguration('frame_prefix'),
                 'use_sim_time': launch.substitutions.LaunchConfiguration('use_sim_time'), }]),
-        
+
         launch_ros.actions.Node(
-            package='slam_toolbox',
-            executable='async_slam_toolbox_node',
-            name='slam_toolbox',
-            output='screen',
-            namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
-            remappings=[('/tf',launch.substitutions.LaunchConfiguration('tf_remapping')),
-                        ('/tf_static',launch.substitutions.LaunchConfiguration('static_tf_remap')),
-                        ('/scan', launch.substitutions.LaunchConfiguration('scan_topic')),
-                        ('/map', launch.substitutions.LaunchConfiguration('map_topic')),
-                        ('/odom',launch.substitutions.LaunchConfiguration('odom_topic'))],
-            parameters=[launch.substitutions.LaunchConfiguration('slam_params'),
-                        {'use_sim_time': launch.substitutions.LaunchConfiguration('use_sim_time')}])
+        namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
+        parameters=[launch.substitutions.LaunchConfiguration('slam_params_file')],
+        package='slam_toolbox',
+        executable='async_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen',
+        remappings=[('/tf',launch.substitutions.LaunchConfiguration('tf_remapping')),
+                    ('/tf_static',launch.substitutions.LaunchConfiguration('static_tf_remap')),
+                    ('/scan', launch.substitutions.LaunchConfiguration('scan_topic')),
+                    ('/map', launch.substitutions.LaunchConfiguration('map_topic')),
+                    ('/odom',launch.substitutions.LaunchConfiguration('odom_topic'))],),
+
+        launch.actions.TimerAction(
+            period=5.0,
+            actions=[],),
 
     ])
