@@ -12,7 +12,7 @@ from launch_ros.actions import Node, PushRosNamespace
 from launch.conditions import IfCondition, UnlessCondition
 from launch.actions import TimerAction, ExecuteProcess
 
-NUM_ROBOTS = 3
+NUM_ROBOTS = 2
 
 
 def gen_robot_list(number_of_robots):
@@ -71,8 +71,7 @@ def generate_launch_description():
     for robot in robots:
         robot_name = robot['name']
 
-        group_cmds = GroupAction([
-            IncludeLaunchDescription(
+        spawn_robots_cmds.append(IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch', 'generic_spawn_launch.py')),
                 launch_arguments={
                                   'use_sim_time': use_sim_time,
@@ -90,8 +89,7 @@ def generate_launch_description():
                                   'y': TextSubstitution(text=str(robot['y_pose'])),
                                   'z': TextSubstitution(text=str(robot['z_pose']))
                                   }.items()),
-        ])
-        spawn_robots_cmds.append(group_cmds)
+        )
 
         start_rviz_cmds.append(IncludeLaunchDescription(
                     PythonLaunchDescriptionSource(os.path.join(nav2_bringup, 'launch', "rviz_launch.py")),
@@ -105,7 +103,7 @@ def generate_launch_description():
         nav2_group_cmds = GroupAction([
             PushRosNamespace(namespace=robot_name),
             IncludeLaunchDescription(
-                    PythonLaunchDescriptionSource(os.path.join(pkg_path, 'launch', "navigation_launch.py")),
+                    PythonLaunchDescriptionSource(os.path.join(nav2_bringup, 'launch', "navigation_launch.py")),
                     launch_arguments={
                         "namespace": TextSubstitution(text=robot_name),
                         "use_namespace": "True",

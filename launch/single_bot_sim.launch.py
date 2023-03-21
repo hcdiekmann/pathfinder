@@ -13,7 +13,8 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     pkg_pathfinder = get_package_share_directory('pathfinder')
-
+    nav2_bringup = os.path.join(get_package_share_directory('nav2_bringup'))
+    
     # Process the URDF xacro file
     xacro_file = os.path.join(pkg_pathfinder,'description','robot.urdf.xacro')
     urdf = xacro.process_file(xacro_file)
@@ -27,7 +28,7 @@ def generate_launch_description():
     )
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
-    world_file_path = os.path.join(pkg_pathfinder, 'worlds', 'maze.world') 
+    world_file_path = os.path.join(pkg_pathfinder, 'worlds', 'test.world') 
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
@@ -53,7 +54,7 @@ def generate_launch_description():
     # Include nav2_bringup launch file
     nav2_params_file = os.path.join(pkg_pathfinder, 'config', 'nav2_params.yaml')
     nav2 = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(pkg_pathfinder,'launch','navigation_launch.py')]),
+                PythonLaunchDescriptionSource([os.path.join(nav2_bringup,'launch','navigation_launch.py')]),
                 launch_arguments={'params_file': nav2_params_file}.items()
     )
     
