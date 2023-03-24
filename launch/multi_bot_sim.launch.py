@@ -8,9 +8,7 @@ from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch.actions import (
     DeclareLaunchArgument,
     ExecuteProcess,
-    GroupAction,
     IncludeLaunchDescription,
-    LogInfo,
 )
 
 

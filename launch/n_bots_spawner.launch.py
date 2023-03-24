@@ -21,8 +21,8 @@ def gen_robot_list(number_of_robots):
     
     for i in range(number_of_robots):
         robot_name = "pathfinder_"+ str(i)
-        x_pos = float(i)
-        robots.append({'name': robot_name, 'x_pose': x_pos, 'y_pose': 0.0, 'z_pose': 0.01})
+        x_pos = float(i + (i*1.5))
+        robots.append({'name': robot_name, 'x_pose': x_pos, 'y_pose': 0.0, 'z_pose': 0.01, 'roll': 0.0, 'pitch': 0.0, 'yaw': 0.0})
 
     return robots 
 
@@ -34,13 +34,25 @@ def generate_launch_description():
 
     use_sim_time = LaunchConfiguration('use_sim_time')
     slam_params_file = LaunchConfiguration('slam_params_file')
+    nav2_params_file = LaunchConfiguration('nav2_params_file')
+    explore_params_file = LaunchConfiguration('explore_params_file')
     use_rviz = LaunchConfiguration('use_rviz')
     rviz_config = LaunchConfiguration('rviz_config')
 
     declare_slam_params_file_cmd = DeclareLaunchArgument(
         'slam_params_file',
-        default_value=os.path.join(pkg_path,'config', 'mapper_params_online_async.yaml'),
+        default_value=os.path.join(pkg_path,'params', 'mapper_params_online_async.yaml'),
         description='Full path to the ROS2 parameters file to use for the slam_toolbox node')
+    
+    declare_nav2_params_file_cmd = DeclareLaunchArgument(
+        'nav2_params_file',
+        default_value=os.path.join(pkg_path,'params', 'nav2_params.yaml'),
+        description='Full path to the ROS2 parameters file to use for the nav2 stack')
+    
+    declare_explore_params_file_cmd = DeclareLaunchArgument(
+        'explore_params_file',
+        default_value=os.path.join(pkg_path,'params', 'explore_params.yaml'),
+        description='Full path to the ROS2 parameters file to use for the explore_lite node')
 
     declare_use_rviz_cmd = DeclareLaunchArgument(
         "use_rviz", 
@@ -83,11 +95,15 @@ def generate_launch_description():
                                   'map_topic': '/'+robot_name+'/map',
                                   'odom_topic': '/'+robot_name+'/odom',
                                   'slam_params_file': slam_params_file,
+                                  'explore_params_file': explore_params_file,
                                   'urdf': open(urdf_path).read(),
                                   'urdf_path': urdf_path,
                                   'x': TextSubstitution(text=str(robot['x_pose'])),
                                   'y': TextSubstitution(text=str(robot['y_pose'])),
-                                  'z': TextSubstitution(text=str(robot['z_pose']))
+                                  'z': TextSubstitution(text=str(robot['z_pose'])),
+                                  'roll': TextSubstitution(text=str(robot['roll'])),
+                                  'pitch': TextSubstitution(text=str(robot['pitch'])),
+                                  'yaw': TextSubstitution(text=str(robot['yaw'])),
                                   }.items()),
         )
 
@@ -95,8 +111,9 @@ def generate_launch_description():
                     PythonLaunchDescriptionSource(os.path.join(nav2_bringup, 'launch', "rviz_launch.py")),
                     condition=IfCondition(use_rviz),
                     launch_arguments={
-                        "namespace": TextSubstitution(text=robot_name),
+                        "use_sim_time": use_sim_time,
                         "use_namespace": "True",
+                        "namespace": TextSubstitution(text=robot_name),
                         "rviz_config": rviz_config,
                     }.items()))
         
@@ -108,7 +125,7 @@ def generate_launch_description():
                         "namespace": TextSubstitution(text=robot_name),
                         "use_namespace": "True",
                         "use_sim_time": use_sim_time,
-                        "params_file": os.path.join(pkg_path, 'config', 'nav2_params.yaml')
+                        "params_file": nav2_params_file,
                         }.items())
         ])
         start_nav2_cmds.append(nav2_group_cmds)
@@ -118,6 +135,8 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(declare_slam_params_file_cmd)
+    ld.add_action(declare_nav2_params_file_cmd)
+    ld.add_action(declare_explore_params_file_cmd)
     ld.add_action(declare_use_rviz_cmd)
     ld.add_action(declare_rviz_config_file_cmd)
 

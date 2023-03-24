@@ -29,6 +29,12 @@ def main():
                         help='the y component of the initial position [meters]')
     parser.add_argument('-z', type=float, default=0,
                         help='the z component of the initial position [meters]')
+    parser.add_argument('-R', type=float, default=0,
+                        help='the roll component of the initial orientation [radians]')
+    parser.add_argument('-P', type=float, default=0,
+                        help='the pitch component of the initial orientation [radians]')
+    parser.add_argument('-Y', type=float, default=0,
+                        help='the yaw component of the initial orientation [radians]')
 
     args, unknown = parser.parse_known_args()
 
@@ -71,6 +77,11 @@ def main():
     request.initial_pose.position.x = float(args.x)
     request.initial_pose.position.y = float(args.y)
     request.initial_pose.position.z = float(args.z)
+    request.initial_pose.orientation.w = float(0.0)
+    request.initial_pose.orientation.x = float(args.R)
+    request.initial_pose.orientation.y = float(args.P)
+    request.initial_pose.orientation.z = float(args.Y)
+
 
 
     if args.namespace is True:

@@ -19,7 +19,10 @@ def generate_launch_description():
                 '--robot_namespace', launch.substitutions.LaunchConfiguration('robot_namespace'),
                 '-x', launch.substitutions.LaunchConfiguration('x'),
                 '-y', launch.substitutions.LaunchConfiguration('y'),
-                '-z', launch.substitutions.LaunchConfiguration('z')]),
+                '-z', launch.substitutions.LaunchConfiguration('z'),
+                '-R', launch.substitutions.LaunchConfiguration('roll'),
+                '-P', launch.substitutions.LaunchConfiguration('pitch'),
+                '-Y', launch.substitutions.LaunchConfiguration('yaw'),]),
 
         launch_ros.actions.Node(
             package='robot_state_publisher',
@@ -33,20 +36,28 @@ def generate_launch_description():
                 'use_sim_time': launch.substitutions.LaunchConfiguration('use_sim_time'), }]),
 
         launch_ros.actions.Node(
-        namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
-        parameters=[launch.substitutions.LaunchConfiguration('slam_params_file')],
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
         name='slam_toolbox',
         output='screen',
+        namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
+        parameters=[launch.substitutions.LaunchConfiguration('slam_params_file')],
         remappings=[('/tf',launch.substitutions.LaunchConfiguration('tf_remapping')),
                     ('/tf_static',launch.substitutions.LaunchConfiguration('static_tf_remap')),
                     ('/scan', launch.substitutions.LaunchConfiguration('scan_topic')),
                     ('/map', launch.substitutions.LaunchConfiguration('map_topic')),
-                    ('/odom',launch.substitutions.LaunchConfiguration('odom_topic'))],),
+                    ('/odom',launch.substitutions.LaunchConfiguration('odom_topic'))]),
 
-        launch.actions.TimerAction(
-            period=5.0,
-            actions=[],),
+        launch_ros.actions.Node(
+            package='explore_lite',
+            executable='explore',
+            namespace=launch.substitutions.LaunchConfiguration('robot_namespace'),
+            output='screen',
+            parameters=[launch.substitutions.LaunchConfiguration('explore_params_file')],
+            remappings=[
+                ('/tf', launch.substitutions.LaunchConfiguration('tf_remapping')),
+                ('/tf_static', launch.substitutions.LaunchConfiguration('static_tf_remap')),]),
+
+        
 
     ])
