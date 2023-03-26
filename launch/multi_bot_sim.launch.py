@@ -47,6 +47,7 @@ def generate_launch_description():
           'use_sim_time',
           default_value='True',
           description='Use simulation/Gazebo clock'),
+          
         start_gazebo,
         spawn_robots,
     ])

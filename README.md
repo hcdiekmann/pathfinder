@@ -1,10 +1,17 @@
 # Pathfinder
-A ROS 2 Gazebo simulation of an autonomous differential drive robot with a LiDAR sensor.
+A ROS 2 Gazebo simulation of a differential drive robot. 
 
-> **NOTE:** This package was developed and tested with ROS 2 Foxy on Ubuntu 20.04
+## **Features**
+- SLAM thanks to [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox)
+- Autonmous navigation thanks to [nav2](https://github.com/ros-planning/navigation2)
+- Multi-robot simulation
+- Autonmous exploration thanks to [m_explore](https://github.com/robo-friends/m-explore-ros2)
 
-![Robot](https://user-images.githubusercontent.com/13176191/218996845-17a21302-1ec9-4555-a887-d7cf6899bc79.png)
-___
+## **Requirements**
+
+- Gazebo Classic 11.10.2
+- ROS 2 Foxy on Ubuntu 20.04 or ROS 2 Humble on Ubuntu 22.04
+
 
 ## **Install**
 
@@ -48,10 +55,11 @@ rviz2 -d src/pathfinder/config/view_nav2_slam.rviz
 ```
 ![RViz](https://user-images.githubusercontent.com/13176191/224490741-6aced55b-c8c3-4514-948a-45b03ebb5801.png)
 
+- #### Spawn multiple robot instances in separate namespaces 
+> This has currently only been tested on **ROS 2 Humble**
+```bash
+ros2 launch pathfinder multi_bot_sim.launch.py
+```
+Launching the simulation with multiple robots automatically starts RViz for each robot.
 
-## Todo
-- [x] add SLAM (Simultaneous Localization and Mapping)
-- [x] add Nav2 for autonomous navigation
-- [ ] add localization (AMCL)
-- [ ] add SLAM and Nav2 to multiple robot launch
-- [ ] add ROS & Gazebo dependencies to package.xml
+> **NOTE:** Spawning multiple robots with online SLAM and the full navigation stack in each namespace requires a capable dev machine. 
