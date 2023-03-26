@@ -4,7 +4,7 @@ import xacro
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, RegisterEventHandler
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, RegisterEventHandler, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.event_handlers import OnExecutionComplete
 from launch_ros.actions import Node
@@ -28,11 +28,19 @@ def generate_launch_description():
     )
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
-    world_file_path = os.path.join(pkg_pathfinder, 'worlds', 'test.world') 
-    gazebo = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
-                    launch_arguments={'world': world_file_path}.items()
+    world = os.path.join(pkg_pathfinder, 'worlds', 'maze.world') 
+     # Gazebo launch
+    start_gazebo = ExecuteProcess(
+        cmd=[
+            'gazebo',
+            "--verbose",
+            "-s",
+            "libgazebo_ros_init.so",
+            "-s",
+            "libgazebo_ros_factory.so",
+            world,
+        ],
+        output="screen",
     )
 
     # Run the spawner node from the gazebo_ros package to spawn the robot in the simulation
@@ -51,11 +59,20 @@ def generate_launch_description():
                 launch_arguments={'slam_params_file': slam_params_file}.items()
     )
 
-    # Include nav2_bringup launch file
+    # Load nav2 parameters from yaml file and add nav2 bringup to launch description
     nav2_params_file = os.path.join(pkg_pathfinder, 'params', 'nav2_params.yaml')
     nav2 = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(nav2_bringup,'launch','navigation_launch.py')]),
                 launch_arguments={'params_file': nav2_params_file}.items()
+    )
+
+    # Load explore_lite parameters from yaml file and add node to launch description
+    explore_params_file = os.path.join(pkg_pathfinder, 'params', 'explore_params.yaml')
+    explore = Node(
+            package='explore_lite',
+            executable='explore',
+            output='screen',
+            parameters=[explore_params_file]
     )
     
 
@@ -67,7 +84,7 @@ def generate_launch_description():
           description='Use simulation/Gazebo clock'
         ),
         rsp,
-        gazebo,
+        start_gazebo,
         RegisterEventHandler(
                     event_handler=OnExecutionComplete(
                         target_action=spawn_entity,
@@ -76,4 +93,5 @@ def generate_launch_description():
         ),
         spawn_entity,
         slam,
+        explore
     ])
