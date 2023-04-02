@@ -4,7 +4,7 @@
     <joint name="depth_cam_joint" type="fixed">
         <parent link="chassis"/>
         <child link="camera_link"/>
-        <origin xyz="0.305 0 0.1" rpy="0 0 0"/>
+        <origin xyz="0.31 0 0.1" rpy="0 0 0"/>
     </joint>
 
     <link name="camera_link">
@@ -42,10 +42,10 @@
 
         <sensor name="camera" type="depth">
             <pose> 0 0 0 0 0 0 </pose>
-            <visualize>true</visualize>
-            <update_rate>10</update_rate>
+            <visualize>false</visualize>
+            <update_rate>15</update_rate>
             <camera>
-                <horizontal_fov>1.089</horizontal_fov>
+                <!-- <horizontal_fov>1.089</horizontal_fov> -->
                 <image>
                     <format>B8G8R8</format>
                     <width>640</width>
@@ -53,7 +53,7 @@
                 </image>
                 <clip>
                     <near>0.28</near>
-                    <far>6.0</far>
+                    <far>10.0</far>
                 </clip>
             </camera>
 
