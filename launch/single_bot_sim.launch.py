@@ -36,7 +36,7 @@ def generate_launch_description():
     )
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
-    world = os.path.join(pkg_pathfinder, 'worlds', 'yolo.world') 
+    world = os.path.join(pkg_pathfinder, 'worlds', 'test.world') 
      # Gazebo launch
     start_gazebo = ExecuteProcess(
         cmd=[
@@ -89,7 +89,7 @@ def generate_launch_description():
     )
 
     # Launch RViz to vizualize the robot and the map in real time
-    rviz_config_file = os.path.join(pkg_pathfinder, 'rviz', 'view_depth_yolo.rviz')
+    rviz_config_file = os.path.join(pkg_pathfinder, 'rviz', 'view_nav2_slam.rviz')
     rviz2_node = Node(
                 package='rviz2',
                 executable='rviz2',
@@ -120,22 +120,22 @@ def generate_launch_description():
                 on_start=[
                     LogInfo(msg='Starting Gazebo & spawning robot...'),
                     TimerAction(
-                        period=6.0,
+                        period=5.0,
                         actions=[spawn_entity_node],
                     ),
                 ]
             )
         ),
-        # RegisterEventHandler(
-        #     OnProcessExit(
-        #         target_action=spawn_entity_node,
-        #         on_exit=[
-        #             LogInfo(msg='Robot spawned, starting SLAM...'),
-        #             slam
-        #         ]
-        #     )
-        # ),
-        # delayed_nav2_launch,
+        RegisterEventHandler(
+            OnProcessExit(
+                target_action=spawn_entity_node,
+                on_exit=[
+                    LogInfo(msg='Robot spawned, starting SLAM...'),
+                    slam
+                ]
+            )
+        ),
+        delayed_nav2_launch,
         delayed_rviz2_launch,
         # frontier_explore_node # Uncomment this line to enable the explore_lite node to start mapping the environment
     ])

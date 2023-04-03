@@ -124,10 +124,10 @@
       <pose>1.00741 1.17582 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>839 194000000</sim_time>
-      <real_time>64 48151627</real_time>
-      <wall_time>1680466557 856806320</wall_time>
-      <iterations>50336</iterations>
+      <sim_time>1007 464000000</sim_time>
+      <real_time>225 265934301</real_time>
+      <wall_time>1680503216 816886991</wall_time>
+      <iterations>168270</iterations>
       <model name='Stop Sign'>
         <pose>3.70475 -0.974028 0 0 0 -1.28821</pose>
         <scale>1 1 1</scale>
@@ -139,10 +139,10 @@
         </link>
       </model>
       <model name='fire_hydrant'>
-        <pose>3.673 1.17582 0 0 -0 0</pose>
+        <pose>1.99181 0.638744 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>3.673 1.17582 0 0 -0 0</pose>
+          <pose>1.99181 0.638744 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -174,7 +174,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-8.19925 -1.1547 4.82854 0 0.279643 -0.119812</pose>
+        <pose>-6.73953 2.01706 2.5651 0 0.195643 0.144189</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
