@@ -4,8 +4,8 @@ A ROS 2 Gazebo simulation of a differential drive robot.
 ## **Features**
 - SLAM thanks to [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox)
 - Autonmous navigation thanks to [nav2](https://github.com/ros-planning/navigation2)
-- Multi-robot simulation
 - Autonmous exploration thanks to [m_explore](https://github.com/robo-friends/m-explore-ros2)
+- Multi-robot simulation 
 
 ## **Requirements**
 
