@@ -14,8 +14,8 @@ A ROS 2 Gazebo simulation of a differential drive robot.
 
 | ROS Version | Ubuntu Version | Branch                                                                                           | Multi-Robot Support |
 | ----------- | -------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
-| ROS 2 Foxy  | 20.04          | [main](https://github.com/ros2/ros2/tree/main)                                                   | &#9744; No        |
-| ROS 2 Humble | 22.04          | [Humble](https://github.com/ros2/ros2/tree/humble-devel)                                         | &#9745; Yes        |
+| ROS 2 Foxy  | 20.04          | [main](https://github.com/hcdiekmann/pathfinder/tree/main)                                                   | &#9744; No        |
+| ROS 2 Humble | 22.04          | [Humble](https://github.com/hcdiekmann/pathfinder/tree/humble-devel)                                         | &#9745; Yes        |
 
 
 
