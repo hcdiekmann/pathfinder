@@ -10,7 +10,12 @@ A ROS 2 Gazebo simulation of a differential drive robot.
 ## **Requirements**
 
 - Gazebo Classic 11.10.2
-- ROS 2 Foxy on Ubuntu 20.04 or ROS 2 Humble on Ubuntu 22.04
+
+
+| ROS Version | Ubuntu Version | Branch                                                                                           | Multi-Robot Support |
+| ----------- | -------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
+| ROS 2 Foxy  | 20.04          | [main](https://github.com/hcdiekmann/pathfinder/tree/main)                                                   | &#9744;   No        |
+| ROS 2 Humble | 22.04          | [Humble](https://github.com/hcdiekmann/pathfinder/tree/humble-devel)                                         | &#9745;  Yes        |
 
 
 ## **Install**
