@@ -10,7 +10,15 @@ A ROS 2 Gazebo simulation of a differential drive robot.
 ## **Requirements**
 
 - Gazebo Classic 11.10.2
-- ROS 2 Foxy on Ubuntu 20.04 or ROS 2 Humble on Ubuntu 22.04
+
+
+| ROS Version | Ubuntu Version | Branch                                                                                           | Multi-Robot Support |
+| ----------- | -------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
+| ROS 2 Foxy  | 20.04          | [main](https://github.com/ros2/ros2/tree/main)                                                   | &#9744; No        |
+| ROS 2 Humble | 22.04          | [Humble](https://github.com/ros2/ros2/tree/humble-devel)                                         | &#9745; Yes        |
+
+
+
 
 
 ## **Install**
@@ -60,6 +68,7 @@ rviz2 -d src/pathfinder/config/view_nav2_slam.rviz
 ```bash
 ros2 launch pathfinder multi_bot_sim.launch.py
 ```
-Launching the simulation with multiple robots automatically starts RViz for each robot.
+Launching the simulation with multiple robots automatically starts separate RViz instances for each robot.
 
-> **NOTE:** Spawning multiple robots with online SLAM and the full navigation stack in each namespace requires a capable dev machine. 
+> NOTE: 
+Spawning multiple robots with online SLAM and the full navigation stack in each namespace requires a capable dev machine.
