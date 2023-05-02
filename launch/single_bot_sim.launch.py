@@ -36,7 +36,7 @@ def generate_launch_description():
     )
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
-    world = os.path.join(pkg_pathfinder, 'worlds', 'test.world') 
+    world = os.path.join(pkg_pathfinder, 'worlds', 'YOLO.world') 
      # Gazebo launch
     start_gazebo = ExecuteProcess(
         cmd=[
